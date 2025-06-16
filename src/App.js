@@ -301,7 +301,7 @@ const MagicalGiftBox = () => {
           onClick={closeModal}
         >
           <div
-            className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 max-w-sm sm:max-w-md md:max-w-lg w-full text-center transform animate-bounce relative"
+            className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 max-w-sm sm:max-w-md md:max-w-lg w-full text-center "
             onClick={(e) => e.stopPropagation()}
           >
             <img
