@@ -6,6 +6,7 @@ import pic3 from "./compo/pic3.jpg";
 import pic4 from "./compo/pic4.jpg";
 import pic5 from "./compo/pic5.jpg";
 import audio1 from "./compo/audio1.waptt";
+import music from "./compo/music.dat";
 const MagicalGiftBox = () => {
   const [isOpened, setIsOpened] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -15,7 +16,6 @@ const MagicalGiftBox = () => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
-  // Sample images - replace these with your actual images
   const memories = [
     {
       id: 1,
@@ -55,19 +55,16 @@ const MagicalGiftBox = () => {
     setSelectedPhoto(memory);
     setIsPlayingAudio(true);
 
-    // Create and play audio
     const audio = new Audio(memory.voiceMessage);
     setCurrentAudio(audio);
 
     audio.play().catch((e) => console.log("Audio play failed:", e));
 
-    // Handle audio end
     audio.onended = () => {
       setIsPlayingAudio(false);
       setSelectedPhoto(null);
       setViewedPhotos((prev) => new Set([...prev, memory.id]));
 
-      // Check if all photos viewed
       if (viewedPhotos.size >= memories.length - 1) {
         setTimeout(() => {
           setShowFinalMessage(true);
@@ -85,7 +82,6 @@ const MagicalGiftBox = () => {
     setIsPlayingAudio(false);
     setViewedPhotos((prev) => new Set([...prev, selectedPhoto.id]));
 
-    // Check if all photos viewed after manual close
     if (viewedPhotos.size >= memories.length - 1) {
       setTimeout(() => {
         setShowFinalMessage(true);
@@ -93,7 +89,6 @@ const MagicalGiftBox = () => {
     }
   };
 
-  // Responsive floating bubbles positioning
   const floatingBubbles = memories.map((memory, index) => ({
     ...memory,
     x: 15 + (index % 3) * 25 + Math.random() * 15,
@@ -103,7 +98,6 @@ const MagicalGiftBox = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-950 via-blue-950 to-indigo-950 overflow-hidden relative">
-      {/* Starry background */}
       <div className="absolute inset-0">
         {[...Array(30)].map((_, i) => (
           <div
@@ -119,7 +113,6 @@ const MagicalGiftBox = () => {
         ))}
       </div>
 
-      {/* Butterflies */}
       {isOpened && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {[...Array(6)].map((_, i) => (
@@ -140,7 +133,6 @@ const MagicalGiftBox = () => {
         </div>
       )}
 
-      {/* Floating particles */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(15)].map((_, i) => (
           <div
@@ -156,7 +148,6 @@ const MagicalGiftBox = () => {
         ))}
       </div>
 
-      {/* Gift Box Screen */}
       {!isOpened && (
         <div className="flex items-center justify-center min-h-screen px-4">
           <div className="text-center">
@@ -164,7 +155,6 @@ const MagicalGiftBox = () => {
               ✨ For the Most Amazing Mom ✨
             </h1>
 
-            {/* Gift Box */}
             <div
               onClick={handleGiftBoxClick}
               className={`relative cursor-pointer transform transition-all duration-500 hover:scale-110 ${
@@ -172,24 +162,18 @@ const MagicalGiftBox = () => {
               } mx-auto`}
             >
               <div className="relative">
-                {/* Glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 rounded-3xl blur-xl opacity-75 animate-pulse"></div>
 
-                {/* Gift box */}
                 <div className="relative bg-gradient-to-br from-red-500 to-pink-600 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-3xl shadow-2xl">
-                  {/* Horizontal ribbon */}
                   <div className="absolute top-1/2 left-0 right-0 h-4 sm:h-6 md:h-8 bg-gradient-to-r from-yellow-400 to-amber-500 transform -translate-y-1/2 shadow-lg"></div>
 
-                  {/* Vertical ribbon */}
                   <div className="absolute top-0 bottom-0 left-1/2 w-4 sm:w-6 md:w-8 bg-gradient-to-b from-yellow-400 to-amber-500 transform -translate-x-1/2 shadow-lg"></div>
 
-                  {/* Bow */}
                   <div className="absolute -top-3 sm:-top-4 md:-top-6 left-1/2 transform -translate-x-1/2">
                     <div className="w-8 sm:w-12 md:w-16 h-6 sm:h-8 md:h-12 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full shadow-lg"></div>
                     <div className="absolute top-1 sm:top-2 left-1/2 transform -translate-x-1/2 w-2 sm:w-3 md:w-4 h-4 sm:h-6 md:h-8 bg-gradient-to-b from-yellow-300 to-amber-400 rounded-full"></div>
                   </div>
 
-                  {/* Sparkles */}
                   {sparkleAnimation && (
                     <>
                       {[...Array(12)].map((_, i) => (
@@ -217,7 +201,6 @@ const MagicalGiftBox = () => {
         </div>
       )}
 
-      {/* Floating Bubbles Screen */}
       {isOpened && !showFinalMessage && (
         <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8 relative">
           <h2 className="absolute top-4 sm:top-6 md:top-8 left-1/2 transform -translate-x-1/2 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center px-4">
@@ -228,7 +211,6 @@ const MagicalGiftBox = () => {
             </span>
           </h2>
 
-          {/* Floating bubbles without images */}
           {floatingBubbles.map((memory) => (
             <div
               key={memory.id}
@@ -241,17 +223,14 @@ const MagicalGiftBox = () => {
               }}
             >
               <div className="relative">
-                {/* Glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full blur-lg opacity-60"></div>
 
-                {/* Bubble */}
                 <div className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 border-4 border-white shadow-xl flex items-center justify-center">
                   <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
                     💝
                   </span>
                 </div>
 
-                {/* Heart indicator for viewed photos */}
                 {viewedPhotos.has(memory.id) && (
                   <Heart
                     className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 text-red-500 animate-bounce"
@@ -264,9 +243,11 @@ const MagicalGiftBox = () => {
         </div>
       )}
 
-      {/* Final Message Screen */}
       {showFinalMessage && (
         <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
+           <audio autoPlay loop>
+        <source src= {music} type="audio/wav" />
+      </audio>
           <div className="text-center animate-fade-in">
             <div className="mb-6 sm:mb-8 flex flex-wrap justify-center">
               {[...Array(15)].map((_, i) => (
@@ -294,7 +275,6 @@ const MagicalGiftBox = () => {
         </div>
       )}
 
-      {/* Modal for displaying full image with voice */}
       {selectedPhoto && (
         <div
           className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-50"
@@ -310,12 +290,11 @@ const MagicalGiftBox = () => {
               className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-2xl object-cover mx-auto border-4 border-purple-400 shadow-xl"
             />
 
-            {/* Close button */}
             <button
               onClick={closeModal}
               className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-red-500 text-white w-6 h-6 sm:w-8 sm:h-8 rounded-full hover:bg-red-600 transition-colors text-sm sm:text-base"
             >
-              ×
+              
             </button>
           </div>
         </div>
