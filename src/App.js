@@ -6,6 +6,10 @@ import pic3 from "./compo/pic3.jpg";
 import pic4 from "./compo/pic4.jpg";
 import pic5 from "./compo/pic5.jpg";
 import audio1 from "./compo/audio1.waptt";
+import audio2 from "./compo/audio2.waptt";
+import audio3 from "./compo/audio3.waptt";
+import audio4 from "./compo/audio4.waptt";
+import audio5 from "./compo/audio5.waptt";
 import music from "./compo/music.dat";
 const MagicalGiftBox = () => {
   const [isOpened, setIsOpened] = useState(false);
@@ -25,22 +29,22 @@ const MagicalGiftBox = () => {
     {
       id: 2,
       photo: pic2,
-      voiceMessage: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+      voiceMessage: audio2,
     },
     {
       id: 3,
       photo: pic3,
-      voiceMessage: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+      voiceMessage: audio3,
     },
     {
       id: 4,
       photo: pic4,
-      voiceMessage: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+      voiceMessage: audio4,
     },
     {
       id: 5,
       photo: pic5,
-      voiceMessage: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+      voiceMessage: audio5,
     },
   ];
 
@@ -245,9 +249,9 @@ const MagicalGiftBox = () => {
 
       {showFinalMessage && (
         <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
-           <audio autoPlay loop>
-        <source src= {music} type="audio/wav" />
-      </audio>
+          <audio autoPlay loop>
+            <source src={music} type="audio/wav" />
+          </audio>
           <div className="text-center animate-fade-in">
             <div className="mb-6 sm:mb-8 flex flex-wrap justify-center">
               {[...Array(15)].map((_, i) => (
@@ -293,9 +297,7 @@ const MagicalGiftBox = () => {
             <button
               onClick={closeModal}
               className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-red-500 text-white w-6 h-6 sm:w-8 sm:h-8 rounded-full hover:bg-red-600 transition-colors text-sm sm:text-base"
-            >
-              
-            </button>
+            ></button>
           </div>
         </div>
       )}
